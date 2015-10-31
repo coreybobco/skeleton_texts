@@ -1,6 +1,8 @@
 import re
-from random import shuffle
+import random
+import operator
 from collections import OrderedDict
+from pprint import pprint
 
 class Text_Class:
     """
@@ -9,9 +11,8 @@ class Text_Class:
 
     def __init__(self):
         self.source = ""
-        self.word_frequencies = {}
-        self.flipped_word_frequencies = {}
-        self.words_organized_by_frequency = []
+        self.indexed_frequencies_by_word = {}
+        self.indexed_words_by_frequency = {}
         # self.readFile(filename)
         # self.clean_text = self.clean(self.source)
      
@@ -84,39 +85,50 @@ class Text_Class:
         # use re.split using the speaker name regex
         speaker_name = "[A-Z][A-za-z.]+:"
 
-    def organize_words_by_frequency(self):
-        if (self.flipped_word_frequencies == {}):
-            self.calculate_flipped_word_frequencies()
-        words_organized_by_frequency = []
-        for frequency, word_list in self.flipped_word_frequencies.items():
-            shuffle(word_list)
-            for i in range(len(word_list)):
-                for j in range(frequency):
-                    words_organized_by_frequency.append(word_list[i])
-        self.words_organized_by_frequency = words_organized_by_frequency
-
-    def calculate_word_frequencies(self):
+    def index_frequencies_by_word(self):
         text_as_list = self.divide_into_words()
-        word_frequencies = {}
+        indexed_frequencies_by_word = {}
         for word in text_as_list:
-            if word in word_frequencies.keys():
-                word_frequencies[word] += 1
+            if word in indexed_frequencies_by_word.keys():
+                indexed_frequencies_by_word[word] += 1
             else:
-                word_frequencies[word] = 1
-        self.word_frequencies = word_frequencies
+                indexed_frequencies_by_word[word] = 1
+        self.indexed_frequencies_by_word = indexed_frequencies_by_word
 
-    def calculate_flipped_word_frequencies(self):
-        if (self.word_frequencies == {}):
-            self.calculate_word_frequencies()
-        flipped_word_frequencies = {}
-        for word, frequency in self.word_frequencies.items():
-            if frequency in flipped_word_frequencies.keys():
-                flipped_word_frequencies[frequency].append(word)
+    def index_words_by_frequency(self):
+        if (self.indexed_frequencies_by_word == {}):
+            self.index_frequencies_by_word()
+        indexed_words_by_frequency = {}
+        for word, frequency in self.indexed_frequencies_by_word.items():
+            if frequency in indexed_words_by_frequency.keys():
+                indexed_words_by_frequency[frequency].append(word)
             else:
-                flipped_word_frequencies[frequency] = [word]
-        self.flipped_word_frequencies = OrderedDict(sorted(flipped_word_frequencies.items(), reverse=True))
+                indexed_words_by_frequency[frequency] = [word]
+        self.indexed_words_by_frequency = indexed_words_by_frequency
+        # Sort indexed words by frequency by length of list of words paired with each frequency
+        self.index_unique_word_counts_by_frequency()
+        indexed_words_by_frequency = OrderedDict()
+        for frequency in self.indexed_unique_word_counts_by_frequency.keys():
+            indexed_words_by_frequency[frequency] = self.indexed_words_by_frequency[frequency]
+        self.indexed_words_by_frequency = indexed_words_by_frequency
+        self.list_of_frequencies = list(indexed_words_by_frequency.keys())
+        self.frequency_count =  len(self.list_of_frequencies)
 
-    def get_random_word_by_percentile(self, percentile):
-        self.organize_words_by_frequency()
-        index = round((percentile / 100) * len(self.words_organized_by_frequency))
-        return self.words_organized_by_frequency[index]
+    def index_unique_word_counts_by_frequency(self):
+        if self.indexed_words_by_frequency == {}:
+            self.index_words_by_frequency()
+        indexed_unique_word_counts_by_frequency = {}
+        for frequency, list_of_words in self.indexed_words_by_frequency.items():
+            indexed_unique_word_counts_by_frequency[frequency] = len(list_of_words)
+        sorted_tuples = sorted(indexed_unique_word_counts_by_frequency.items(), key=operator.itemgetter(1), reverse=False)
+        indexed_unique_word_counts_by_frequency = OrderedDict()
+        for (frequency, word_count) in sorted_tuples:
+            indexed_unique_word_counts_by_frequency[frequency] = word_count
+        self.indexed_unique_word_counts_by_frequency = indexed_unique_word_counts_by_frequency
+
+    def get_random_word_by_frequency_input(self, frequency_input):
+        return random.choice(self.indexed_words_by_frequency[self.list_of_frequencies[frequency_input]])
+
+        
+
+
