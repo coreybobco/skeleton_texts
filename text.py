@@ -129,6 +129,19 @@ class Text_Class:
     def get_random_word_by_frequency_input(self, frequency_input):
         return random.choice(self.indexed_words_by_frequency[self.list_of_frequencies[frequency_input]])
 
+    def break_into_bones(self):
+        frequency_scale_bones = list(re.findall("{[\S]*\([ABCDEF],[\s]?[\S]*\)}"), skeleton)
+        portmanteau_bones = list(re.findall("{frequency_scale\([ABCDEF],[\s]?[\S]*\)}"))
+        for ectoplasm in frequency_scale_bones:
+            function_name = re.match("\{[\S]{3,}", ectoplasm)
+            call = re.search("\([ABCDEF],[\s]?[\S]*\)", ectoplasm)
+            call = frequency_scale_call[1:-1].replace(" ", "")
+            call_args = call.split(",")
+
+
+
+
+
+
+            
         
-
-

@@ -30,9 +30,9 @@ onload = function(){
 		}
 		var request_json = JSON.stringify(request_obj);
 		var request = new XMLHttpRequest()
-		req.addEventListener("load", show_output)
-		req.open("post", "./generate", true)
-		req.send(request_json)
+		request.addEventListener("load", show_output)
+		request.open("post", "./generate", true)
+		request.send(request_json)
 	}
 } 
 
