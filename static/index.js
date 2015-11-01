@@ -1,6 +1,7 @@
 onload = function(){
 	var show_output = function() { 
-	    var active_output = document.querySelector("#skeletons").querySelector(".active").querySelector("textarea");
+		console.log("got here");
+	    var active_output = document.querySelector("#outputs").querySelector(".active").querySelector("textarea");
 	    active_output.value = this.responseText;
 	}
 	var add_frequency_scale_button = document.querySelector("#add_frequency_scale_button");

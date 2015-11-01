@@ -10,8 +10,9 @@ def index():
 
 @app.route("/generate", methods=['POST'])
 def generate():
-	request = json.decode(request.get_data())
-	skeleton = request.skeleton 
+	req_obj = json.loads(request.get_data().decode(encoding='UTF-8'))
+	skeleton = req_obj['skeleton'] 
+	return skeleton
 
 if __name__ == '__main__':
   app.run(
