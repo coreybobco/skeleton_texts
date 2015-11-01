@@ -1,9 +1,11 @@
 <html>
 <body>
-	<link rel="stylesheet" href="static/index.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="static/index.js"></script>
+	<link rel="stylesheet" href="static/index.css">
+
 	<div id="header">
 		<h1 id="title"><font color="#878787">Skeleton</font> Texts</h1>
 	</div>
@@ -21,9 +23,9 @@
 				<option value="F">F</option>
 			</select> with 
 			<input id="frequency_scale_frequency" style="width:37px"></input><strong> frequency</strong>
-			<button>Add</button><br>
+			<button id="add_frequency_scale_button">Add</button><br>
 			<label for="frequency_scale_text_select">Portmanteau: use text</label>
-			<select id="frequency_scale_text_select">
+			<select id="portmanteau_text_select">
 				<option value="A">A</option>
 				<option value="B">B</option>
 				<option value="C">C</option>
@@ -31,8 +33,8 @@
 				<option value="E">E</option>
 				<option value="F">F</option>
 			</select>
-			 and <label><input type="checkbox"></input><strong> filter out common words</strong></label>
-			
+			 and <label><input id="filter_portmanteau_source" type="checkbox"></input><strong> <strike>filter out common words </strike></strong></label>
+			 <button id="add_portmanteau_button">Add</button>
 		</div>
 		<div id="input_container">
 			<ul id="input_tab_list" class="nav nav-tabs nav-justified" style="width:500px">
@@ -42,7 +44,7 @@
 				<li><a data-toggle="tab" href="#skeleton4">Skeleton 4</a></li>
 				<li><a data-toggle="tab" href="#skeleton5">Skeleton 5</a></li>
 			</ul>
-			<div class="tab-content">
+			<div id="skeleton_tabs" class="tab-content">
 				<div id="inputtab1" class="tab-pane fade in active">
 				   <textarea cols=78 rows=28  placeholder="This is where you build a text skeleton!."></textarea>
 				</div>
@@ -64,34 +66,36 @@
 			</div>
 		</div> 
 		<div id="divider">
-			<div id="upload_list">Source 
+			<div id="upload_list">
+				<h4 id="upload_list_title"><strong>Upload Sources Here</strong><h4> 
 				<table>
 					<tr>
-						<td>A. </td>
+						<td><strong>A</strong> </td>
 						<td><input id="file_A" type="file"></input></td>
 					</tr>
 					<tr>
-						<td>B. </td>
+						<td><strong>B</strong> </td>
 						<td><input id="file_B" type="file"></input></td>
 					</tr>
 					<tr>
-						<td>C. </td>
+						<td><strong>C</strong> </td>
 						<td><input id="file_C" type="file"></input></td>
 					</tr>
 					<tr>
-						<td>D. </td>
+						<td><strong>D</strong> </td>
 						<td><input id="file_D" type="file"></input></td>
 					</tr>
 					<tr>
-						<td>E. </td>
+						<td><strong>E</strong> </td>
 						<td><input id="file_E" type="file"></input></td>
 					</tr>
 					<tr>
-						<td>F. </td>
+						<td><strong>F</strong> </td>
 						<td><input id="file_F" type="file"></input></td>
 					</tr>
 				</table>
 			</div>
+			<button id="generate_body_button"><font color="#800000">Generate</font> <font color="#5c392f">Body</font></button><br>
 		</div>
 	    <div id="output_container">
 			<ul id="output_tab_list" class="nav nav-tabs nav-justified" style="width:500px">

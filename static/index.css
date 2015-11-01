@@ -6,5 +6,7 @@ body { padding-left: 15px }
 #divider {float:left;}
 #output_container {float:left; margin-bottom:10px;}
 textarea { display: inline-block; vertical-align: middle;}
-#upload_list {padding-top:36px; margin-top:160px;}
+#upload_list {padding-top:36px; margin-top:130px;}
+#upload_list_title {}
 input[type="file"] {width: 150px;}
+#generate_body_button {display:block;margin:auto;margin-top:20px; font: bold 20px Tahoma, serif;}
