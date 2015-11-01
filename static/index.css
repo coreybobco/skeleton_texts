@@ -10,3 +10,4 @@ textarea { display: inline-block; vertical-align: middle;}
 #upload_list_title {}
 input[type="file"] {width: 150px;}
 #generate_body_button {display:block;margin:auto;margin-top:20px; font: bold 20px Tahoma, serif;}
+input[type="checkbox"] {vertical-align:middle; margin-right:3px; margin-bottom:3px;}
