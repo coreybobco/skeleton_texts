@@ -24,7 +24,7 @@ onload = function(){
 			// file = 
 		});
 		var request_obj = {}
-		var request_obj.skeleton = document.querySelector("#skeletons").querySelector(".active").querySelector("textarea").value;
+		request_obj.skeleton = document.querySelector("#skeletons .active textarea").value;
 		for (var i=0; i < file_contents.length; i++){
 			request_obj['file_' + i] = file_contents[i];
 		}
@@ -39,4 +39,13 @@ onload = function(){
 function insertBuildingBlock(insertion) {
 	var textarea = document.querySelector("#skeletons").querySelector(".active").querySelector("textarea");
 	textarea.value = textarea.value + " " + insertion;
+}
+
+window.file_contents = []
+function handleFileUpload(input_element) {
+  var file = input_element.files[0]
+  /* why the hell is this api asyncronous */
+  var reader = new FileReader()
+  reader.onload = function(){ window.file_contents[input_element.getAttribute("data-idx")] = arguments[0].target.result }
+  reader.readAsText(file)
 }
