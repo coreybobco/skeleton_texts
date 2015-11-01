@@ -1,0 +1,10 @@
+body { padding-left: 15px }
+#header { width: 1100px; }
+#title { font: bold 32px Georgia, serif; margin:auto; text-align:center;}
+#body_container {width: 1500px}
+#input_container {float:left; margin-bottom:10px;}
+#divider {float:left;}
+#output_container {float:left; margin-bottom:10px;}
+textarea { display: inline-block; vertical-align: middle;}
+#upload_list {padding-top:36px; margin-top:160px;}
+input[type="file"] {width: 150px;}
