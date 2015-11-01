@@ -126,17 +126,33 @@ class Text_Class:
             indexed_unique_word_counts_by_frequency[frequency] = word_count
         self.indexed_unique_word_counts_by_frequency = indexed_unique_word_counts_by_frequency
 
-    def get_random_word_by_frequency_input(self, frequency_input):
+    def random_word_by_freq_scale(self, frequency_input):
         return random.choice(self.indexed_words_by_frequency[self.list_of_frequencies[frequency_input]])
 
-    def break_into_bones(self):
-        frequency_scale_bones = list(re.findall("{[\S]*\([ABCDEF],[\s]?[\S]*\)}"), skeleton)
-        portmanteau_bones = list(re.findall("{frequency_scale\([ABCDEF],[\s]?[\S]*\)}"))
-        for ectoplasm in frequency_scale_bones:
-            function_name = re.match("\{[\S]{3,}", ectoplasm)
-            call = re.search("\([ABCDEF],[\s]?[\S]*\)", ectoplasm)
-            call = frequency_scale_call[1:-1].replace(" ", "")
-            call_args = call.split(",")
+    def words_beginning_with(self, substring):
+        # given a substring, returns a list of dictionary words starting with that substring
+        return filter(lambda s: s.startswith(substring) and len(s) > 3, words)
+
+    def random_word(self):
+        words = self.divide_into_into_words()
+        word = ''
+        while len(word) < 3:
+            word = random.choice(words)
+        return word
+
+    def naive_random_portmanteau(self, overlap=2):
+        if overlap > 0:
+            overlap = overlap * -1
+        matches = []
+        word = ''
+        while len(matches) == 0:
+            word = random_word()
+            substring = word[overlap:]
+            matches = words_beginning_with(substring)
+            word_sans_overlap = word[0:overlap]
+        return word_sans_overlap + random.choice(matches)
+
+
 
 
 
