@@ -25,9 +25,10 @@ onload = function(){
 			// file = 
 		});
 		var request_obj = {}
+		request_obj.files = []
 		request_obj.skeleton = document.querySelector("#skeletons .active textarea").value;
 		for (var i=0; i < file_contents.length; i++){
-			request_obj['file_' + i] = file_contents[i];
+			request_obj['files'].push(file_contents[i]);
 		}
 		var request_json = JSON.stringify(request_obj);
 		var request = new XMLHttpRequest()

@@ -9,12 +9,12 @@ class Text_Class:
     divide into words, clauses, sentences, stanzas, lines of dialogue
     """
 
-    def __init__(self):
-        self.source = ""
+    def __init__(self, text):
+        self.source = text
+        self.clean_text()
         self.indexed_frequencies_by_word = {}
         self.indexed_words_by_frequency = {}
-        # self.readFile(filename)
-        # self.clean_text = self.clean(self.source)
+        self.list_of_frequencies = False
      
     def read(self, string):
         self.source += string
@@ -24,7 +24,7 @@ class Text_Class:
         file_content = handle.read()
         self.source = file_content
 
-    def clean(self):
+    def clean_text(self):
         # handle punctuation that ends sentences
         # normalize repeating punctuation
         # abnormal punctuation - any number of .s past 3 is collapsed
@@ -58,7 +58,7 @@ class Text_Class:
         # normalize dashes
         clean_text = clean_text.replace(" - ", "--")
         clean_text = re.sub("[\s]?[-—]+[\s]?","--", clean_text)
-        self.clean_text = clean_text
+        self.clean_text = clean_text + " "
 
     def divide_into_words(self):
         # use the native python String.split method
@@ -127,14 +127,16 @@ class Text_Class:
         self.indexed_unique_word_counts_by_frequency = indexed_unique_word_counts_by_frequency
 
     def random_word_by_freq_scale(self, frequency_input):
+        if self.indexed_words_by_frequency == {} or self.list_of_frequencies == False:
+            self.index_words_by_frequency()
         return random.choice(self.indexed_words_by_frequency[self.list_of_frequencies[frequency_input]])
 
     def words_beginning_with(self, substring):
         # given a substring, returns a list of dictionary words starting with that substring
-        return filter(lambda s: s.startswith(substring) and len(s) > 3, words)
+        return list(filter(lambda s: s.startswith(substring) and len(s) > 3, self.divide_into_words()))
 
     def random_word(self):
-        words = self.divide_into_into_words()
+        words = self.divide_into_words()
         word = ''
         while len(word) < 3:
             word = random.choice(words)
@@ -146,9 +148,9 @@ class Text_Class:
         matches = []
         word = ''
         while len(matches) == 0:
-            word = random_word()
+            word = self.random_word()
             substring = word[overlap:]
-            matches = words_beginning_with(substring)
+            matches = self.words_beginning_with(substring)
             word_sans_overlap = word[0:overlap]
         return word_sans_overlap + random.choice(matches)
 

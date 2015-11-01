@@ -12,7 +12,9 @@ def index():
 def generate():
 	req_obj = json.loads(request.get_data().decode(encoding='UTF-8'))
 	skeleton = req_obj['skeleton'] 
-	return skeleton
+	files = req_obj['files']
+	skeleton_toolkit = Skeleton_Class(skeleton, files)
+	return skeleton_toolkit.generate()
 
 if __name__ == '__main__':
   app.run(
