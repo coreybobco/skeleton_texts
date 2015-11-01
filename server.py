@@ -8,6 +8,7 @@ def index():
 
 @app.route("/generate", methods=['POST'])
 def generate():
+  return ""
 
 if __name__ == '__main__':
   app.run(
