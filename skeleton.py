@@ -16,7 +16,7 @@ class Skeleton_Class:
 		frequency_scale_flesh = []
 		for bone in frequency_scale_bones:
 			t_index = self.get_text_index(bone)
-			frequency_scale = int(re.search("[\d]+", self.skeleton).group(0))
+			frequency_scale = int(re.search("[\d]+", bone).group(0))
 			frequency_scale_flesh.append(self.texts[t_index].random_word_by_freq_scale(frequency_scale))
 		flesh_text = ""
 		print(frequency_scale_flesh)
