@@ -37,8 +37,8 @@ class Text_Class:
         #                      - remove newlines
         clean_text = self.source
         # normalize quotes
-        for char in ["“", "‘"]:
-            clean_test = clean_text.replace("\"");
+        for char in ["“", "‘", "”", "’"]:
+            clean_test = clean_text.replace(char, "\"");
 
         clean_text = clean_text.replace("\n"," ")
 
