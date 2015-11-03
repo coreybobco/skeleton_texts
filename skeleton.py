@@ -32,7 +32,7 @@ class Skeleton_Class:
 		print(flesh_text)
 		portmanteau_regex = "{portmanteau\([ABCDEF],[\s]*[\S]*\)}"
 		portmanteau_bones = re.findall(portmanteau_regex, flesh_text)
-		portmanteau_bone_split = re.split(portmanteau_regex, flesh_text))
+		portmanteau_bone_split = re.split(portmanteau_regex, flesh_text)
 		print("Portmanteaus")
 		portmanteau_flesh = []
 		for bone in portmanteau_bones:
