@@ -15,7 +15,7 @@ class Text_Class:
         self.indexed_frequencies_by_word = {}
         self.indexed_words_by_frequency = {}
         self.list_of_frequencies = False
-     
+
     def read(self, string):
         self.source += string
 
@@ -33,16 +33,15 @@ class Text_Class:
         #                      - fancy quotes into \" and \'
         #                      - collapse sentence delimiters in general
         #                           - go with the first one
-        #                      - remove tab characters 
+        #                      - remove tab characters
         #                      - remove newlines
         clean_text = self.source
         # normalize quotes
-        clean_text = clean_text.replace("“","\"")
-        clean_text = clean_text.replace("”","\"")
-        clean_text = clean_text.replace("‘","\'")
-        clean_text = clean_text.replace("’","\'")
-        # normalize newlines
+        for char in ["“", "‘"]:
+            clean_test = clean_text.replace("\"");
+
         clean_text = clean_text.replace("\n"," ")
+
         # normalize spaces
         while clean_text.find("  ") != -1:
             clean_text = re.sub("[\s\t]{2,}"," ", clean_text)
@@ -129,6 +128,7 @@ class Text_Class:
     def random_word_by_freq_scale(self, frequency_input):
         if self.indexed_words_by_frequency == {} or self.list_of_frequencies == False:
             self.index_words_by_frequency()
+            print("\n" + str(frequency_input) +"\n")
         return random.choice(self.indexed_words_by_frequency[self.list_of_frequencies[frequency_input]])
 
     def words_beginning_with(self, substring):
@@ -153,13 +153,3 @@ class Text_Class:
             matches = self.words_beginning_with(substring)
             word_sans_overlap = word[0:overlap]
         return word_sans_overlap + random.choice(matches)
-
-
-
-
-
-
-
-
-            
-        
